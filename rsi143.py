@@ -178,4 +178,10 @@ def main():
             time.sleep(180)  # 에러 발생 시 3분 대기
 
 if __name__ == "__main__":
-    main()
+    while True:
+        try:
+            main()
+        except Exception as e:
+            print(f"Critical Error: {e}")
+            send_slack_message(f"Critical Error: {e}")
+            time.sleep(300)  # 치명적 에러 발생 시 5분 대기 후 재시작
